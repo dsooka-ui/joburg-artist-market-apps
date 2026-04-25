@@ -32,11 +32,11 @@ body{
   min-height:100vh;
 }
 
-/* Animated gradient background */
+/* Animated gradient background for non-hero areas */
 .hero-bg{
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:-3;
   background:
     radial-gradient(ellipse at 20% 20%, rgba(59,130,246,0.15) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 80%, rgba(20,184,166,0.12) 0%, transparent 50%),
@@ -56,7 +56,7 @@ body{
 .particles{
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:-2;
   pointer-events:none;
   overflow:hidden;
 }
@@ -85,6 +85,8 @@ header{
   display:flex;
   justify-content:center;
   align-items:center;
+  position:relative;
+  z-index:10;
 }
 .logo{
   display:flex;
@@ -106,11 +108,53 @@ header{
   color:var(--accent-blue);
 }
 
-/* Hero */
+/* Hero with market photo */
 .hero{
+  position:relative;
   text-align:center;
-  padding:60px 0 80px;
+  padding:80px 0 100px;
+  overflow:hidden;
 }
+.hero-market-bg{
+  position:absolute;
+  inset:0;
+  background:url('hero-market.jpg') center/cover no-repeat;
+  filter:brightness(0.35) contrast(1.3) saturate(1.2);
+  z-index:0;
+}
+.hero-fade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(7,7,14,0.5) 0%, rgba(7,7,14,0.85) 70%, var(--bg-deep) 100%);
+  z-index:1;
+}
+.hero .container{
+  position:relative;
+  z-index:2;
+}
+
+/* When bar */
+.when-bar{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);
+  padding:12px 28px;
+  border-radius:100px;
+  font-size:0.95rem;
+  color:var(--text-muted);
+  margin-bottom:32px;
+  backdrop-filter:blur(10px);
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.when-bar span{
+  color:var(--accent-amber);
+  font-weight:600;
+}
+
+/* Hero typography */
 .hero h1{
   font-family:'Space Grotesk',sans-serif;
   font-size:clamp(2.5rem,6vw,4.5rem);
@@ -126,26 +170,130 @@ header{
 .hero p{
   font-size:clamp(1.1rem,2vw,1.35rem);
   color:var(--text-muted);
-  max-width:600px;
-  margin:0 auto 48px;
+  max-width:640px;
+  margin:0 auto 40px;
   font-weight:300;
 }
-.hero .address{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:var(--bg-elevated);
-  border:1px solid var(--border);
-  padding:10px 20px;
-  border-radius:100px;
-  font-size:0.9rem;
-  color:var(--text-muted);
-  margin-bottom:48px;
+
+/* Press / Social Proof */
+.press{
+  padding:60px 0;
+  border-bottom:1px solid var(--border);
+  position:relative;
+  z-index:2;
 }
-.hero .address svg{
-  width:16px;
-  height:16px;
-  color:var(--accent-amber);
+.press-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:32px;
+}
+.press-item{
+  text-align:center;
+  padding:24px;
+}
+.press-item p{
+  font-style:italic;
+  color:var(--text-muted);
+  margin-bottom:12px;
+  font-size:1rem;
+  line-height:1.6;
+}
+.press-item .source{
+  font-size:0.75rem;
+  color:var(--accent-blue);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+
+/* JCW Stats */
+.stats{
+  padding:80px 0;
+  position:relative;
+  z-index:2;
+  background:linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-card) 50%, var(--bg-deep) 100%);
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:40px;
+  text-align:center;
+}
+.stat-number{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(2.5rem,5vw,3.5rem);
+  font-weight:700;
+  background:linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1;
+  margin-bottom:8px;
+}
+.stat-label{
+  color:var(--text-muted);
+  font-size:0.95rem;
+  font-weight:500;
+}
+
+/* How It Works */
+.steps{
+  padding:80px 0;
+  position:relative;
+  z-index:2;
+}
+.steps h2{
+  text-align:center;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.8rem,4vw,2.5rem);
+  font-weight:700;
+  margin-bottom:48px;
+  background:linear-gradient(135deg,var(--text) 0%,var(--accent-blue) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.steps-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
+.step{
+  text-align:center;
+  padding:40px 32px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--bg-card);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.step:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.15);
+}
+.step-number{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent-blue),var(--accent-teal));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:1.3rem;
+  box-shadow:0 8px 32px rgba(59,130,246,0.25);
+}
+.step h3{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.3rem;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.step p{
+  color:var(--text-muted);
+  font-size:0.95rem;
+  line-height:1.6;
 }
 
 /* Cards grid */
@@ -153,7 +301,9 @@ header{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   gap:28px;
-  padding-bottom:100px;
+  padding-bottom:80px;
+  position:relative;
+  z-index:2;
 }
 .card{
   background:var(--bg-card);
@@ -237,11 +387,34 @@ header{
   transform:translateX(4px);
 }
 
+/* Mission Band */
+.mission-band{
+  padding:70px 0;
+  text-align:center;
+  background:var(--bg-elevated);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  position:relative;
+  z-index:2;
+}
+.mission-band p{
+  font-size:clamp(1.1rem,2.5vw,1.4rem);
+  max-width:720px;
+  margin:0 auto;
+  color:var(--text);
+  line-height:1.5;
+}
+.mission-band strong{
+  color:var(--accent-teal);
+  font-weight:700;
+}
+
 /* Footer */
 footer{
-  border-top:1px solid var(--border);
   padding:48px 0;
   text-align:center;
+  position:relative;
+  z-index:2;
 }
 footer .jcw{
   display:flex;
@@ -284,18 +457,31 @@ footer .copy{
   from{opacity:0;transform:translateY(30px);}
   to{opacity:1;transform:translateY(0);}
 }
-.hero h1,.hero p,.hero .address,.card{
+.hero h1,.hero p,.hero .when-bar{
   animation:fadeInUp 0.8s ease-out forwards;
   opacity:0;
 }
 .hero p{animation-delay:0.15s;}
-.hero .address{animation-delay:0.3s;}
-.card:first-child{animation-delay:0.45s;}
-.card:nth-child(2){animation-delay:0.6s;}
+.hero .when-bar{animation-delay:0.3s;}
+.card:first-child{animation:fadeInUp 0.8s ease-out 0.45s forwards;opacity:0;}
+.card:nth-child(2){animation:fadeInUp 0.8s ease-out 0.6s forwards;opacity:0;}
+
+/* Scroll-triggered simple fade for sections */
+.scroll-fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.scroll-fade.visible{
+  opacity:1;
+  transform:translateY(0);
+}
 
 @media(max-width:640px){
-  .hero{padding:40px 0 60px;}
+  .hero{padding:60px 0 80px;}
+  .when-bar{padding:10px 18px;font-size:0.85rem;}
   .card{padding:32px 24px;}
+  .step{padding:32px 24px;}
   header{padding:24px 0;}
 }
 </style>
@@ -312,22 +498,90 @@ footer .copy{
 </header>
 
 <main>
+  <!-- Hero -->
   <section class="hero">
+    <div class="hero-market-bg"></div>
+    <div class="hero-fade"></div>
     <div class="container">
+      <div class="when-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Every Saturday & Sunday</span> · 09:00 – 16:00 · 27 Boxes, Melville
+      </div>
       <h1>Apply to be part of<br>something creative.</h1>
       <p>27 Boxes in Melville is becoming Johannesburg's most vibrant artist and maker destination. Whether you're here for a weekend or forever — there's a place for you.</p>
-      <div class="address">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        27 Boxes, 75 4th Avenue, Melville, Johannesburg, 2109
+    </div>
+  </section>
+
+  <!-- Press / Social Proof -->
+  <section class="press container scroll-fade">
+    <div class="press-grid">
+      <div class="press-item">
+        <p>"27 Boxes has been rebranded as the Joburg Artist Market. Think murals, artworks, books, historic buildings, street energy."</p>
+        <div class="source">Daily Maverick — Feb 2026</div>
+      </div>
+      <div class="press-item">
+        <p>"Melville was voted one of the world's 40 coolest neighbourhoods. 7th Street ranked 12th on the list of the coolest streets in the world."</p>
+        <div class="source">Time Out Magazine</div>
+      </div>
+      <div class="press-item">
+        <p>"Johannesburg Artist Market has partnered with Joburg Child Welfare to launch a new giving experience."</p>
+        <div class="source">SA Good News — July 2025</div>
       </div>
     </div>
   </section>
 
+  <!-- JCW Stats -->
+  <section class="stats scroll-fade">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">115</div>
+          <div class="stat-label">Years protecting children<br>since 1909</div>
+        </div>
+        <div>
+          <div class="stat-number">40,000+</div>
+          <div class="stat-label">Children supported<br>every year</div>
+        </div>
+        <div>
+          <div class="stat-number">268,800</div>
+          <div class="stat-label">Meals provided<br>through our programmes</div>
+        </div>
+        <div>
+          <div class="stat-number">30,000+</div>
+          <div class="stat-label">Beneficiaries served<br>in 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="steps container scroll-fade">
+    <h2>How it works</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Apply</h3>
+        <p>Tell us what you make. The form takes 2 minutes and helps us understand your craft.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Get Curated</h3>
+        <p>We review every application to keep the market diverse, high-quality, and balanced.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Set Up & Sell</h3>
+        <p>Weekend stall or permanent box — you choose. Show up, set up, and start selling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Cards -->
   <section class="cards container">
     <a href="vendor.html" class="card">
       <div class="card-icon">🎨</div>
       <h2>Sell at the Market</h2>
-      <p>Apply for a stall at our weekend artist market. Perfect for makers, foodies, vintage curators, and creatives who want to test the Melville crowd.</p>
+      <p>Get your stall in front of Melville's weekend crowd. Test your products, find your customers, and grow your brand in one of Joburg's coolest neighbourhoods.</p>
       <div class="cta">
         Apply as Vendor
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -337,12 +591,19 @@ footer .copy{
     <a href="tenant.html" class="card">
       <div class="card-icon">🏪</div>
       <h2>Rent a Space</h2>
-      <p>Apply for permanent or semi-permanent retail space inside 27 Boxes. From 15m² boxes to larger units — build your brand in Melville's creative hub.</p>
+      <p>Own a piece of 27 Boxes. From 15m² creative boxes to larger retail units — build something permanent in Joburg's most iconic shipping container hub.</p>
       <div class="cta">
         Apply as Tenant
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </a>
+  </section>
+
+  <!-- Mission Band -->
+  <section class="mission-band scroll-fade">
+    <div class="container">
+      <p>Every stall fee and rental goes directly to <strong>child protection programmes</strong> across Johannesburg. When you sell here, you support something bigger.</p>
+    </div>
   </section>
 </main>
 
@@ -377,6 +638,17 @@ for(let i=0;i<15;i++){
   p.style.animationDelay = (Math.random()*10)+'s';
   particlesContainer.appendChild(p);
 }
+
+// Scroll fade-in for sections below the fold
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
