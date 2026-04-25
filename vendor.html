@@ -47,7 +47,6 @@ body{
   padding:0 24px;
 }
 
-/* Header */
 .header{
   padding:24px 0;
   display:flex;
@@ -79,7 +78,6 @@ body{
   width:18px;height:18px;
 }
 
-/* Progress */
 .progress-wrap{
   padding:16px 0 32px;
 }
@@ -104,7 +102,6 @@ body{
   color:var(--text-muted);
 }
 
-/* Form card */
 .form-card{
   background:var(--bg-card);
   border:1px solid var(--border);
@@ -128,7 +125,6 @@ body{
   font-size:0.95rem;
 }
 
-/* Sections */
 .section{
   margin-bottom:32px;
 }
@@ -150,7 +146,6 @@ body{
   border-radius:100px;
 }
 
-/* Inputs */
 .field{
   margin-bottom:20px;
 }
@@ -211,7 +206,6 @@ select{
   padding-right:40px;
 }
 
-/* Checkbox / Radio groups */
 .options{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
@@ -248,7 +242,6 @@ select{
   border-color:rgba(255,255,255,0.2);
 }
 
-/* File upload */
 .file-drop{
   border:2px dashed var(--border);
   border-radius:var(--radius-sm);
@@ -310,7 +303,6 @@ select{
   padding:0;
 }
 
-/* Submit */
 .submit-wrap{
   display:flex;
   gap:16px;
@@ -364,7 +356,6 @@ button[type="submit"].loading .btn-text{display:none;}
   max-width:400px;
 }
 
-/* Success modal */
 .modal-overlay{
   position:fixed;
   inset:0;
@@ -425,7 +416,6 @@ button[type="submit"].loading .btn-text{display:none;}
   color:var(--text);
 }
 
-/* Error banner */
 .error-banner{
   background:rgba(244,63,94,0.1);
   border:1px solid rgba(244,63,94,0.3);
@@ -438,7 +428,6 @@ button[type="submit"].loading .btn-text{display:none;}
 }
 .error-banner.active{display:block;}
 
-/* Footer */
 footer{
   border-top:1px solid var(--border);
   padding:40px 0;
@@ -476,7 +465,6 @@ footer .copy{
   font-size:0.75rem;
 }
 
-/* Animations */
 @keyframes fadeInUp{
   from{opacity:0;transform:translateY(20px);}
   to{opacity:1;transform:translateY(0);}
@@ -660,7 +648,7 @@ footer .copy{
 
 <script>
 // ===== CONFIG =====
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxNru8yoRZUKKJaGj2VhRNu9xDWxnyyz9xe6n0_9TMhdk-d1arAVQCfLrVM9Ja6hYM/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbx593aWZzrtEEBhWhemkfZz1aUHWFaaH5gwGFV3WnaYAMhUGxWgT-opMZneKoFAetY/exec';
 
 // ===== FILE UPLOAD HANDLING =====
 const files = { portfolio: [], healthCert: null };
@@ -797,7 +785,6 @@ form.addEventListener('submit', async e => {
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
     });
     const result = await res.json();
